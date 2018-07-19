@@ -7,7 +7,7 @@
 # you're doing.
 
 HOST = "192.168.1.2"
-API_KEY= "qr2w6wyvfVuR4fw7rFjZtEQ9YmUjFxHC"
+API_KEY= "XXXXXXXXXXXXXXX"
 
 Vagrant.configure(2) do |config|
   # The most common configuration options are documented and commented below.
