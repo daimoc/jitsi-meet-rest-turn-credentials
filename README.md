@@ -1,5 +1,7 @@
-# jitsi-meet-rest-turn-credentials
-This project is made to test the Configuration files for running a Jitsi Meet server with REST API For Access To TURN Services. REST API For Access To TURN is describe in this [draft](https://tools.ietf.org/html/draft-uberti-behave-turn-rest-00). By now, it's design to get TURN credentials from  the [GEANT TURN FEDERATION](http://turn.geant.org/) project using [XEP-0215](https://xmpp.org/extensions/xep-0215.html) mechanism. It's build using documentation from  [jitsi-meet turn configuration documentation](https://github.com/jitsi/jitsi-meet/blob/master/doc/turn.md) and the default jitsi-meet [quick-install](https://github.com/jitsi/jitsi-meet/blob/master/doc/quick-install.md).
+# Motivation
+This project is made to provide configuration files for running a Jitsi Meet server with REST API For Access To TURN Services like described in this [draft](https://tools.ietf.org/html/draft-uberti-behave-turn-rest-00).
+
+By now, it's design to get TURN credentials from  the [GEANT TURN FEDERATION](http://turn.geant.org/) project using [XEP-0215](https://xmpp.org/extensions/xep-0215.html) mechanism. It's build using documentation from  [jitsi-meet turn configuration documentation](https://github.com/jitsi/jitsi-meet/blob/master/doc/turn.md) and the default jitsi-meet [quick-install](https://github.com/jitsi/jitsi-meet/blob/master/doc/quick-install.md).
 
 The specific prosody module mod_restturn.lua was build from the [mod_turncredentials.lua](https://github.com/otalk/mod_turncredentials) module from @fippo.
 
@@ -22,7 +24,7 @@ service prosody restart
  * (Optional) Enable the use of STUN/TURN
   [XEP-0215](https://xmpp.org/extensions/xep-0215.html) in jvb connections : set useStunTurn to true in config object in /etc/jitsi/meet/$HOSTNAME-config.js
 
-# Installation of a running jitsi-meet server with TURN on Ubuntu
+# Installation of a running Jitsi-Meet server with TURN on Ubuntu
 Run the install.sh script with :
 
  * jitsi-meet-host : your jitsi-meet server host name or IP
@@ -31,7 +33,7 @@ Run the install.sh script with :
 sh install.sh itsi-meet-host api-key 
 ```
 
-# Running jitsi-meet server with TURN  with Vagrant
+# Running Jitsi-Meet server with TURN  with Vagrant
 Install Vagrant an your preferred desktop VM runner (....VirtualBox).
 
 Edit the provided Vagrant file and change HOST and API_KEY variables and then run :
