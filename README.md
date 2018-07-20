@@ -1,34 +1,56 @@
 # jitsi-meet-rest-turn-credentials
-The project is made to test the Configuration files for running a Jitsi Meet server with REST API For Access To TURN Services [draft](https://tools.ietf.org/html/draft-uberti-behave-turn-rest-00) and specialy with the [GEANT TURN FEDERATION](http://turn.geant.org/).
+This project is made to test the Configuration files for running a Jitsi Meet server with REST API For Access To TURN Services.
+REST API For Access To TURN is describe int his [draft](https://tools.ietf.org/html/draft-uberti-behave-turn-rest-00).
 
-It's build from [jitsi-meet turn configuration documentation](https://github.com/jitsi/jitsi-meet/blob/master/doc/turn.md) and default jitsi-meet [quick-install](https://github.com/jitsi/jitsi-meet/blob/master/doc/quick-install.md).
+By now, it's design to get TURN credentials from  the [GEANT TURN FEDERATION](http://turn.geant.org/) project using [XEP-0215](https://xmpp.org/extensions/xep-0215.html) mechanism.
+
+It's build using documentation from  [jitsi-meet turn configuration documentation](https://github.com/jitsi/jitsi-meet/blob/master/doc/turn.md) and the default jitsi-meet [quick-install](https://github.com/jitsi/jitsi-meet/blob/master/doc/quick-install.md).
+
+The specific prosody module mod_restturn.lua was build from the [mod_turncredentials.lua](https://github.com/otalk/mod_turncredentials) module from @fippo.
 
 # Status
+We currently only provide a module to get turn credentials from [api.geant.org](https://api.geant.org) but you could change the rest_turn_host prosody variable to connect to other TURN credential service (... and you should also change the path_url variable in mod_restturn.lua prosody module).
 
-We currently only provide a module du get turn credentials from api.geant.org but you could change the rest_turn_host prosody variable to connect to other TURN credential service (... and you should also change the path_url variable in mod_restturn prosody module)
 
-## Installation on Ubuntu
+# Manual configuration for a already installed Jitsi-Meet instance
 
+Edit your prosody VirtualHost configuration (/etc/prosody/conf.d/[servername].cfg.lua) :
+
+ * Add  "restturn" in VirtualHost modules_enabled.
+ * Add rest_turn_host=[rest turn server url] in VirtualHost
+ * Add rest_turn_api_key=[your rest turn server api key] in VirtualHost
+ * Add mod_prosody/mod_restturn.lua in prosofy module folder and restart prosody service.
+```bash
+cp  mod_prosody/mod_restturn.lua /usr/lib/prosody/modules/
+service prosody restart
+```
+ * Enable the use of STUN/TURN [XEP-0215](https://xmpp.org/extensions/xep-0215.html) in p2p connections : set useStunTurn to true in config.p2p object in /etc/jitsi/meet/$HOSTNAME-config.js
+
+ * (Optional) Enable the use of STUN/TURN
+  [XEP-0215](https://xmpp.org/extensions/xep-0215.html) in jvb connections : set useStunTurn to true in config object in /etc/jitsi/meet/$HOSTNAME-config.js
+
+
+# Installation of a running jitsi-meet server with TURN on Ubuntu
 Run the install.sh script with :
-*  jitsi-meet-host : your jitsi-meet server host name or IP
-*  api_key         ; you GEANT turn federation api_key
+
+ * jitsi-meet-host : your jitsi-meet server host name or IP
+ * api-key         : you GEANT turn federation api_key
 
 ```bash
-sh install.sh jitsi-meet-host api_key
+sh install.sh jitsi-meet-host api-key
 ```
 
+# Running jitsi-meet server with TURN  with Vagrant
+Install Vagrant an your preferred desktop VM runner (....VirtualBox).
 
-## Running with Vagrant
-
-Edit the provided Vagrant file and change HOST and API_KEY varaibles then run :
-
-Install Vagrant an your prefered dektop VM runner (....VirtualBox).
+Edit the provided Vagrant file and change HOST and API_KEY variables then run :
 
 ```bash
 vagrant up
 ```
 
-## How to test with Chrome
-* Open chrome://webrtc-internals/
-* 2 browsers in a test conference for exemple https://HOST/testturn
-* You should see the STUN/TURNS credential in the iceServers paramters of your Peerconnections.
+# How to test with Chrome
+
+ * Open chrome://webrtc-internals/
+ * 2 browsers in a test conference for example https://HOST/testturn
+ * You should see the STUN/TURNS credential in the iceServers parameters of your Peerconnections.
