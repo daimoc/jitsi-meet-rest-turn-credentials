@@ -30,7 +30,7 @@ Run the install.sh script with :
  * jitsi-meet-host : your jitsi-meet server host name or IP
  * api-key         : you GEANT turn federation api key
 ```bash
-sh install.sh itsi-meet-host api-key 
+sh install.sh jitsi-meet-host api-key
 ```
 
 # Running Jitsi-Meet server with TURN  with Vagrant
@@ -43,7 +43,7 @@ vagrant up
 ```
 
 # How to test with Chrome
- 
+
  * Open chrome://webrtc-internals/
  * 2 browsers in a test conference for example https://HOST/testturn
  * You should see the STUN/TURNS credential in the iceServers parameters of your Peerconnections.
