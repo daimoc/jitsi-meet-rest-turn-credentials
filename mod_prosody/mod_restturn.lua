@@ -36,7 +36,6 @@ module:hook("iq-get/host/urn:xmpp:extdisco:1:services", function(event)
         return;
     end
     local get_url = host .. path_url .. api_key;
-    module:log("debug", "Post url %s",post_url);
 
     local body, code, headers, status = https.request(get_url);
     module:log("debug", "%s %s",code, body);
