@@ -22,7 +22,8 @@ service prosody restart
  * Enable the use of STUN/TURN [XEP-0215](https://xmpp.org/extensions/xep-0215.html) in p2p connections : set useStunTurn to true in config.p2p object in /etc/jitsi/meet/$HOSTNAME-config.js
 
  * (Optional) Enable the use of STUN/TURN
-  [XEP-0215](https://xmpp.org/extensions/xep-0215.html) in jvb connections : set useStunTurn to true in config object in /etc/jitsi/meet/$HOSTNAME-config.js
+  [XEP-0215](https://xmpp.org/extensions/xep-0215.html) in jvb connections : set useStunTurn to true in config object in /etc/jitsi/meet/$HOSTNAME-config.js. For this option only turns server can be used for JVB connections as the JVB already handle many NAT traversal scenario.
+
 
 # Installation of a running Jitsi-Meet server with TURN on Ubuntu
 Run the install.sh script with :
@@ -47,3 +48,4 @@ vagrant up
  * Open chrome://webrtc-internals/
  * 2 browsers in a test conference for example https://HOST/testturn
  * You should see the STUN/TURNS credential in the iceServers parameters of your Peerconnections.
+ * Force relay mode in jitsi-meet configuration by adding #config.p2p.iceTransportPolicy="relay" in your jitsi conference link or by setting the p2p.iceTransportPolicy option to realy in your /etc/jitsi/meet/$HOSTNAME-config.js file.

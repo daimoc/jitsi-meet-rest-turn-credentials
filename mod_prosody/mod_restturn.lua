@@ -36,19 +36,25 @@ module:hook("iq-get/host/urn:xmpp:extdisco:1:services", function(event)
         return;
     end
     local get_url = host .. path_url .. api_key;
+    local response_body = {};
 
-    local body, code, headers, status = https.request(get_url);
-    module:log("debug", "%s %s",code, body);
+    module:log("debug", "%s",get_url);
+
+    local ret, code, headers, status = https.request{
+        url = get_url,
+        protocol = "tlsv1_1",
+        sink = ltn12.sink.table(response_body),
+    };
+    module:log("debug", "%s %s %s",code, ret, response_body);
 
     local reply = st.reply(stanza);
     reply:tag("services", {xmlns = "urn:xmpp:extdisco:1"});
     if code == 200 then
-        local stun_info = json.decode(body);
+        local stun_info = json.decode(response_body);
         local username = stun_info.username;
         local password = stun_info.password;
         local ttl = stun_info.ttl;
         log("debug", "INFO : %s %s %s", username, password, ttl);
-
         for index,value in ipairs(stun_info.uris) do
             log("debug", "Value  : %s ", value);
             local protocol_delimiter = string.find(value, ":");
@@ -67,10 +73,12 @@ module:hook("iq-get/host/urn:xmpp:extdisco:1:services", function(event)
             local port = string.sub(value,port_delimiter+1,transport_delimiter-1);
             local transport = string.sub(value,transport_end_delimiter+1);
 
-            reply:tag("service", { type = type, host = server_host, port = port, transport = transport, username = username, password = password, ttl = ttl });
-            reply:up();
-
+            if index <= 10 then
+                reply:tag("service", { type = type, host = server_host, port = port, transport = transport, username = username, password = password, ttl = ttl });
+                reply:up();
+            end
         end
+        reply:up();
     end
     reply:up();
     log ("info","TURN info : %s", reply:pretty_print());
