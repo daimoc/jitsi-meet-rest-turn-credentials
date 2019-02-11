@@ -8,6 +8,10 @@ The specific prosody module mod_restturn.lua was build from the [mod_turncredent
 # Status
 We currently only provide a module to get turn credentials from [api.geant.org](https://api.geant.org) but you could change the rest_turn_host prosody variable to connect to other TURN credential service (... and you should also change the path_url variable in mod_restturn.lua prosody module).
 
+# Sequence diagram
+
+<img src="https://github.com/daimoc/jitsi-meet-rest-turn-credentials/blob/master/xep-0215.svg">
+
 # Manual configuration for a Jitsi-Meet instance
 Edit your prosody VirtualHost configuration (/etc/prosody/conf.d/[servername].cfg.lua) :
 
