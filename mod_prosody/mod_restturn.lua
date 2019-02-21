@@ -52,7 +52,7 @@ module:hook("iq-get/host/urn:xmpp:extdisco:1:services", function(event)
     local reply = st.reply(stanza);
     reply:tag("services", {xmlns = "urn:xmpp:extdisco:1"});
     if code == 200 then
-        local stun_info = json.decode(response_body);
+        local stun_info = json.decode(body);
         local username = stun_info.username;
         local password = stun_info.password;
         local ttl = stun_info.ttl;
