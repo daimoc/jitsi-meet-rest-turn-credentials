@@ -45,7 +45,9 @@ module:hook("iq-get/host/urn:xmpp:extdisco:1:services", function(event)
         protocol = "tlsv1_1",
         sink = ltn12.sink.table(response_body),
     };
-    module:log("debug", "%s %s %s",code, ret, response_body);
+
+    local body = table.concat(response_body);
+    module:log("debug", "%s %s %s",code, ret, body);
 
     local reply = st.reply(stanza);
     reply:tag("services", {xmlns = "urn:xmpp:extdisco:1"});
