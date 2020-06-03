@@ -1,3 +1,7 @@
+# Warning 
+Don't use the current version since the HTTP request to rest turn service is not done asynchronously.
+
+
 # Motivation
 This project is made to provide configuration files for running a Jitsi Meet server with REST API For Access To TURN Services like described in this [draft](https://tools.ietf.org/html/draft-uberti-behave-turn-rest-00).
 
