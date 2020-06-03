@@ -1,8 +1,9 @@
-# Warning 
+
+# !!!!!!!!!   Warning !!!!!!
+
 Don't use the current version since the HTTP request to rest turn service is not done asynchronously.
 
 
-# Motivation
 This project is made to provide configuration files for running a Jitsi Meet server with REST API For Access To TURN Services like described in this [draft](https://tools.ietf.org/html/draft-uberti-behave-turn-rest-00).
 
 By now, it's design to get TURN credentials from  the [GEANT TURN FEDERATION](http://turn.geant.org/) project using [XEP-0215](https://xmpp.org/extensions/xep-0215.html) mechanism. It's build using documentation from  [jitsi-meet turn configuration documentation](https://github.com/jitsi/jitsi-meet/blob/master/doc/turn.md) and the default jitsi-meet [quick-install](https://github.com/jitsi/jitsi-meet/blob/master/doc/quick-install.md).
